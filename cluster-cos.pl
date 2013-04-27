@@ -91,8 +91,8 @@ my $sigmaX2 = 0; # 余弦を算出するための、x^2の和
 my $sigmaY2 = 0; # 余弦を算出するための、y^2の和
 
 # クラスタのペアとなる候補 
-my $list1 = 1;
-my $list2 = 1;
+my $list1 = 0;
+my $list2 = 0;
 
 # ２つのクラスタリング内の要素の総数
 my $count = 0;
@@ -142,12 +142,21 @@ while (($cluster{"all"} - 1) > 0) {
 			# 類似度の和を要素数で割る(群平均法)
 			$similarity = $similarity / $count;
 
+			# 要素数を初期化
+			$count = 0;
+
 			# もし類似度最大のペアが見つかればリストに保存
 			if ($max < $similarity) {
 				$max = $similarity;
 				$list1 = $i;
 				$list2 = $j;
 				
+				# 類似度を初期化
+				$similarity = 0;
+				
+			}
+			else {
+				# 類似度を初期化
 				$similarity = 0;
 			}
 
@@ -164,8 +173,8 @@ while (($cluster{"all"} - 1) > 0) {
 	@{$cluster{$list1}} = @prefectures;
 	@{$cluster{$list2}} = (\0);
 	
-	$list1 = 1;
-	$list2 = 1;
+	$list1 = 0;
+	$list2 = 0;
 	$cluster{"all"}--;
 
 

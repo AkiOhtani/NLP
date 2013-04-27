@@ -76,12 +76,9 @@ my %cluster;
 my $number = 1;
 
 foreach $prefecture( keys %gotouchi ) {
-
 	# クラスタの番号に対して都道府県名の配列を用意		
 	my @prefectures = ($prefecture);
-
 	@{$cluster{$number}} = @prefectures;
- 	$cluster{"all"} = 0;
 	$number = $number + 1;
 }
 
